@@ -4,11 +4,19 @@ $port = getenv('DB_PORT') ?: '3309';  // <--- PUERTO 3309
 $dbname = getenv('DB_NAME') ?: 'tienda_emprendedores';
 $user = getenv('DB_USER') ?: 'root';
 $pass = getenv('DB_PASS') ?: '';
+$sslCa = getenv('DB_SSL_CA') ?: '';
 
 try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $pdoOptions = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ];
+    if ($sslCa !== '' && is_readable($sslCa)) {
+        $pdoOptions[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
+        $pdoOptions[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
+    }
+
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $user, $pass, $pdoOptions);
     $columnCheck = $pdo->query("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'orders' AND COLUMN_NAME = 'payment_receipt'");
     if ((int) $columnCheck->fetchColumn() === 0) {
         $pdo->exec("ALTER TABLE orders ADD COLUMN payment_receipt VARCHAR(500) NULL");
