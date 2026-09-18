@@ -1,0 +1,73 @@
+# ============================================
+# CONFIGURACIÓN DE APACHE PARA PHP
+# ============================================
+
+# Habilitar mod_rewrite para URLs amigables
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirigir todo a index.php excepto archivos y carpetas existentes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# ============================================
+# CONFIGURACIÓN DE CORS
+# ============================================
+<IfModule mod_headers.c>
+    # Permitir solicitudes desde cualquier origen (desarrollo)
+    # En producción, limitar a dominios específicos
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+    Header set Access-Control-Allow-Credentials "true"
+</IfModule>
+
+# ============================================
+# CONFIGURACIÓN DE SEGURIDAD
+# ============================================
+
+# Ocultar información del servidor
+<IfModule mod_headers.c>
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+</IfModule>
+
+# Prevenir listado de directorios
+Options -Indexes
+
+# Proteger archivos sensibles
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Proteger archivos de configuración
+<FilesMatch "(config|database|env)\.php$">
+    Require all denied
+</FilesMatch>
+
+# ============================================
+# MANEJO DE ERRORES PERSONALIZADO
+# ============================================
+ErrorDocument 404 /backend/index.php
+ErrorDocument 403 /backend/index.php
+ErrorDocument 500 /backend/index.php
+
+# ============================================
+# COMPRESIÓN Y OPTIMIZACIÓN
+# ============================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ============================================
+# CONFIGURACIÓN DE PHP
+# ============================================
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+    php_value memory_limit 256M
+</IfModule>

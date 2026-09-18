@@ -1,0 +1,74 @@
+# ============================================
+# ARCHIVOS DE ENTORNO Y CONFIGURACIÓN
+# ============================================
+.env
+.env.local
+.env.*.local
+
+# ============================================
+# DEPENDENCIAS Y CACHE DE PHP
+# ============================================
+/vendor/
+composer.lock
+composer.phar
+
+# ============================================
+# ARCHIVOS DE LOG
+# ============================================
+*.log
+error_log
+access_log
+logs/
+
+# ============================================
+# ARCHIVOS TEMPORALES Y DE SISTEMA
+# ============================================
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.swo
+*~
+tmp/
+cache/
+temp/
+*.cache
+
+# ============================================
+# ARCHIVOS SUBIDOS (LOCAL)
+# ============================================
+/uploads/
+!uploads/.gitkeep
+uploads/*
+
+# ============================================
+# ARCHIVOS DE EDITORES
+# ============================================
+.vscode/
+.idea/
+*.sublime-*
+.editorconfig
+
+# ============================================
+# ARCHIVOS DE DEPURACIÓN
+# ============================================
+*.map
+*.tsbuildinfo
+
+# ============================================
+# OTROS ARCHIVOS
+# ============================================
+*.sqlite
+*.sqlite3
+*.db
+.phpunit.result.cache
+.php-cs-fixer.cache
+.htaccess.bak
+.htaccess.old
+
+# ============================================
+# RESPALDOS
+# ============================================
+*.bak
+*.backup
+*.old

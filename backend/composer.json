@@ -1,0 +1,23 @@
+{
+    "name": "tienda-emprendedores/backend",
+    "description": "API REST para Tienda en Línea de Emprendedores EDAYO",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raúl Ciriaco Castillo",
+            "email": "ciriacoral1567@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "firebase/php-jwt": "6.10.0",
+        "phpmailer/phpmailer": "^6.0",
+        "cloudinary/cloudinary_php": "^2.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "policy.advisories.ignore-id": ["PKSA-y2cr-5h3j-g3ys"]
+    }
+}

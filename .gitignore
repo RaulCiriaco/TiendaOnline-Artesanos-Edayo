@@ -1,0 +1,18 @@
+.env
+.env.*
+!.env.example
+
+node_modules/
+dist/
+
+# Local IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local uploads, logs, and temporary files
+backend/uploads/*
+!backend/uploads/.gitkeep
+*.log
+*.tmp

@@ -1,0 +1,1202 @@
+/* ==========================================================================
+   SISTEMA DE DISEÑO ARTESANAL - TIENDA EMPRENDEDORES EDAYO
+   Diseño Cálido, Profesional y Orgánico para Emprendedores y Artesanos
+   ========================================================================== */
+
+:root {
+  /* Paleta Artesanal Principal Rica y Colorida */
+  --artisan-terracotta: #b85834;
+  --artisan-terracotta-hover: #984424;
+  --artisan-terracotta-light: #fbece5;
+  --artisan-terracotta-subtle: #f6d8cb;
+  
+  --artisan-sage: #2d604e;
+  --artisan-sage-hover: #1f4537;
+  --artisan-sage-light: #e4eee8;
+  --artisan-sage-subtle: #cde0d5;
+  
+  --artisan-amber: #d97706;
+  --artisan-amber-light: #fef0c7;
+  --artisan-amber-dark: #b45309;
+
+  --artisan-coral: #d9534f;
+  --artisan-teal: #1f6f78;
+
+  /* Colores de Fondo y Superficie Vivos y Cálidos (¡Cero fondo blanco plano!) */
+  --artisan-bg: #f5e8d7;
+  --artisan-bg-gradient: 
+    radial-gradient(ellipse 90% 60% at 10% 8%, rgba(217, 119, 6, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 90% 12%, rgba(184, 88, 52, 0.24) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(45, 96, 78, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 50% at 15% 85%, rgba(217, 83, 79, 0.20) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 60% at 85% 90%, rgba(217, 119, 6, 0.20) 0%, transparent 60%),
+    linear-gradient(160deg, #f7ebd9 0%, #f4e2cb 35%, #eedac1 70%, #f7ebd8 100%);
+  
+  --artisan-surface: #fffcf7;
+  --artisan-surface-panel: #fdf5ea;
+  --artisan-card-bg: #fffdf9;
+  
+  /* Textos y Tintas */
+  --artisan-ink: #231c17;
+  --artisan-ink-muted: #6f6256;
+  --artisan-ink-light: #968677;
+  
+  /* Bordes y Líneas Cálidas */
+  --artisan-border: #e6d3be;
+  --artisan-border-subtle: #eeddc9;
+  --artisan-border-focus: #b85834;
+
+  /* Sombras Cálidas de Taller */
+  --artisan-shadow-xs: 0 1px 3px rgba(184, 88, 52, 0.06);
+  --artisan-shadow-sm: 0 6px 18px rgba(184, 88, 52, 0.08), 0 2px 6px rgba(45, 96, 78, 0.05);
+  --artisan-shadow-md: 0 14px 34px rgba(184, 88, 52, 0.12), 0 4px 10px rgba(45, 96, 78, 0.07);
+  --artisan-shadow-lg: 0 22px 54px rgba(184, 88, 52, 0.16);
+  --artisan-shadow-hover: 0 18px 40px rgba(184, 88, 52, 0.20);
+
+  /* Tipografías */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Radios de Esquinas */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+}
+
+/* Base y Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--artisan-ink);
+  background: var(--artisan-bg-gradient);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Textura artesanal de telar / urdimbre sobre el fondo */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(184, 88, 52, 0.07) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(45, 96, 78, 0.07) 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+  background-position: 0 0, 13px 13px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Cinta decorativa Sarape / Telar Mexicano multicolor en la parte superior */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4.5px;
+  background: linear-gradient(90deg, 
+    #b85834 0%, 
+    #d97706 18%, 
+    #e11d48 36%, 
+    #059669 54%, 
+    #0284c7 72%, 
+    #d97706 90%, 
+    #b85834 100%);
+  z-index: 9999;
+}
+
+/* Tipografía */
+h1, h2, h3, h4, h5, .font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--artisan-ink);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+p, span, a, button, input, select, textarea {
+  font-family: var(--font-sans);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8c371b;
+  background: linear-gradient(135deg, #fdeee7, #f9dfd5);
+  padding: 0.28rem 0.85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid #f2c5b5;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 6px rgba(184, 88, 52, 0.08);
+}
+
+/* Barra de Navegación */
+.navbar {
+  background: #191614 !important;
+  border-bottom: 3px solid var(--artisan-terracotta);
+  padding: 0.85rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 100;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff9f0 !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.92;
+}
+
+.navbar-brand .brand-badge {
+  background: linear-gradient(135deg, var(--artisan-terracotta), #d97706);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(184, 88, 52, 0.4);
+}
+
+.nav-link {
+  color: #e5ded4 !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: #ffdda8 !important;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.nav-link.active {
+  color: #ffffff !important;
+  background: rgba(184, 88, 52, 0.3);
+}
+
+.navbar .user-chip {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  color: #f7ede0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dropdown-menu {
+  background: var(--artisan-surface);
+  border: 1px solid var(--artisan-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--artisan-shadow-lg);
+  padding: 0.6rem;
+  min-width: 220px;
+  animation: fadeInDown 0.2s ease;
+}
+
+.dropdown-item {
+  border-radius: var(--radius-sm);
+  color: var(--artisan-ink);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background: var(--artisan-sage-light);
+  color: var(--artisan-sage);
+  transform: translateX(3px);
+}
+
+.dropdown-item.text-danger:hover {
+  background: #fef2f2;
+  color: #dc2626 !important;
+}
+
+/* Pie de Página */
+footer {
+  background: #181513 !important;
+  border-top: 3px solid var(--artisan-amber);
+  color: #d6cdc4 !important;
+  padding: 3rem 0 2rem;
+  margin-top: 5rem;
+}
+
+footer .footer-crest {
+  font-family: var(--font-display);
+  color: #fff9f0;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+footer p {
+  color: #a89f95;
+  font-size: 0.92rem;
+}
+
+footer .footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  color: #ebd7be;
+}
+
+/* Contenedores y Estructura */
+.page-shell {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 2.2rem;
+  border-bottom: 1px solid var(--artisan-border-subtle);
+  padding-bottom: 1.25rem;
+}
+
+.page-heading h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  margin: 0.2rem 0;
+  color: var(--artisan-ink);
+}
+
+.page-heading p {
+  color: var(--artisan-ink-muted);
+  font-size: 1.05rem;
+  margin: 0;
+  max-width: 680px;
+}
+
+/* Tarjetas y Paneles de Superficie */
+.card, .surface-panel {
+  background: var(--artisan-card-bg);
+  border: 1.5px solid var(--artisan-border);
+  border-top: 3.5px solid var(--artisan-terracotta);
+  border-radius: var(--radius-md);
+  box-shadow: var(--artisan-shadow-sm);
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1), border-color 0.25s ease;
+}
+
+.surface-panel {
+  padding: 2rem;
+}
+
+.card:hover {
+  border-color: #d8c3ab;
+  box-shadow: var(--artisan-shadow-md);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Hero Principal de Tienda: Ricos Tonos Artesanales */
+.hero-shop {
+  position: relative;
+  background: linear-gradient(135deg, #173226 0%, #244b3b 32%, #783821 72%, #b85834 100%);
+  color: #fff9f0;
+  padding: 4.8rem 0 4.2rem;
+  margin-bottom: 3rem;
+  border-bottom: 4px solid var(--artisan-amber);
+  box-shadow: 0 10px 30px rgba(184, 88, 52, 0.18);
+  overflow: hidden;
+}
+
+.hero-shop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 12% 20%, rgba(254, 240, 138, 0.26) 0%, transparent 45%),
+                    radial-gradient(circle at 85% 75%, rgba(225, 29, 72, 0.24) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 15%, rgba(217, 119, 6, 0.24) 0%, transparent 42%);
+  pointer-events: none;
+}
+
+.hero-shop::after {
+  content: '';
+  position: absolute;
+  width: 32rem;
+  height: 32rem;
+  right: -6rem;
+  top: -10rem;
+  border-radius: 50%;
+  border: 1px solid rgba(254, 243, 199, 0.18);
+  box-shadow: 0 0 0 30px rgba(254, 243, 199, 0.04), 0 0 0 60px rgba(254, 243, 199, 0.02);
+  pointer-events: none;
+}
+
+.hero-shop .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-shop .eyebrow {
+  background: rgba(254, 243, 199, 0.15);
+  color: #fef08a;
+  border-color: rgba(254, 243, 199, 0.25);
+}
+
+.hero-shop h1 {
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  color: #ffffff;
+  line-height: 1.05;
+  margin: 0.6rem 0 1.2rem;
+  max-width: 800px;
+}
+
+.hero-shop p {
+  font-size: 1.15rem;
+  color: #e2ece5;
+  max-width: 620px;
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.86rem;
+  color: #f0f7f3;
+}
+
+/* Tarjetas de Producto */
+.product-card {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--artisan-border);
+  overflow: hidden;
+  background: #ffffff;
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: #d1c1b0;
+  box-shadow: var(--artisan-shadow-hover);
+}
+
+.product-card .img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 230px;
+  background: #f4ede4;
+}
+
+.product-card .card-img-top {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.product-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.product-card .badge-artisan {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(25, 22, 20, 0.75);
+  backdrop-filter: blur(6px);
+  color: #ffedd5;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.product-card .card-body {
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-card .card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: var(--artisan-ink);
+}
+
+.product-card .card-text {
+  color: var(--artisan-ink-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin-bottom: 0.85rem;
+}
+
+.product-card .price {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--artisan-terracotta);
+  margin-bottom: 0.2rem;
+}
+
+.product-card .seller-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--artisan-sage);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Botones con Alma Artesanal */
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.92rem;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--artisan-terracotta) !important;
+  border-color: var(--artisan-terracotta) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(184, 88, 52, 0.25);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: var(--artisan-terracotta-hover) !important;
+  border-color: var(--artisan-terracotta-hover) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(184, 88, 52, 0.35);
+}
+
+.btn-success {
+  background: var(--artisan-sage) !important;
+  border-color: var(--artisan-sage) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(54, 94, 78, 0.25);
+}
+
+.btn-success:hover, .btn-success:focus {
+  background: var(--artisan-sage-hover) !important;
+  border-color: var(--artisan-sage-hover) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(54, 94, 78, 0.35);
+}
+
+.btn-outline-primary {
+  color: var(--artisan-terracotta) !important;
+  border-color: var(--artisan-terracotta) !important;
+  background: transparent !important;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+  background: var(--artisan-terracotta) !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-secondary {
+  color: var(--artisan-ink-muted) !important;
+  border-color: var(--artisan-border) !important;
+  background: transparent !important;
+}
+
+.btn-outline-secondary:hover, .btn-outline-secondary:focus {
+  background: #ece5dc !important;
+  color: var(--artisan-ink) !important;
+  border-color: #dcd0c2 !important;
+}
+
+.btn-warning {
+  background: var(--artisan-amber) !important;
+  border-color: var(--artisan-amber) !important;
+  color: #ffffff !important;
+}
+
+.btn-warning:hover {
+  background: var(--artisan-amber-dark) !important;
+  border-color: var(--artisan-amber-dark) !important;
+  color: #ffffff !important;
+}
+
+.btn-danger {
+  background: #be123c !important;
+  border-color: #be123c !important;
+}
+
+/* Formularios e Inputs */
+.form-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #4a443e;
+  margin-bottom: 0.4rem;
+}
+
+.form-control, .form-select {
+  border: 1.5px solid #decab4;
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.95rem;
+  font-size: 0.95rem;
+  color: var(--artisan-ink);
+  background: #fffdfa;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--artisan-terracotta);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(184, 88, 52, 0.18);
+  background: #ffffff;
+}
+
+/* Tablas con Diseño Artesanal Vívido */
+.table-responsive {
+  background: #fffdfa;
+  border: 1.5px solid #e6d3bd;
+  border-top: 3.5px solid var(--artisan-sage);
+  border-radius: var(--radius-md);
+  box-shadow: var(--artisan-shadow-sm);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  margin-bottom: 0;
+  vertical-align: middle;
+  background-color: transparent;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, #1f4234 0%, #2f5a4a 100%) !important;
+  color: #fffaf0 !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1.05rem 1.25rem;
+  border-bottom: 3px solid var(--artisan-amber) !important;
+  white-space: nowrap;
+}
+
+.table tbody tr {
+  background-color: transparent;
+}
+
+.table tbody tr:nth-of-type(even) {
+  background-color: rgba(247, 237, 222, 0.55);
+}
+
+.table tbody td {
+  padding: 1rem 1.25rem;
+  border-color: #ede0cf;
+  color: var(--artisan-ink);
+  font-size: 0.92rem;
+}
+
+.table-hover tbody tr:hover {
+  background: rgba(217, 119, 6, 0.12) !important;
+}
+
+/* Overrides de utilidades Bootstrap para evitar blancos planos */
+.bg-white {
+  background-color: #fffdfa !important;
+}
+
+.bg-light {
+  background-color: #f7ebd9 !important;
+  border-color: #ebd7bf !important;
+}
+
+/* Badges de Estados Artesanales */
+.badge-artisan-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.status-pending {
+  background: var(--artisan-amber-light);
+  color: var(--artisan-amber-dark);
+  border: 1px solid #fde68a;
+}
+
+.status-paid {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.status-shipped {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.status-delivered {
+  background: var(--artisan-sage-light);
+  color: var(--artisan-sage);
+  border: 1px solid var(--artisan-sage-subtle);
+}
+
+.status-cancelled {
+  background: #fff1f2;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+}
+
+/* Tarjetas de Estadísticas para Emprendedores (Dashboard / Reportes) */
+.stat-card-artisan {
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  box-shadow: var(--artisan-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card-artisan:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--artisan-shadow-md);
+}
+
+.stat-card-terracotta {
+  background: linear-gradient(135deg, #c7562f 0%, #873014 100%);
+}
+
+.stat-card-sage {
+  background: linear-gradient(135deg, #2a6952 0%, #154232 100%);
+}
+
+.stat-card-amber {
+  background: linear-gradient(135deg, #e68200 0%, #9e4e00 100%);
+}
+
+.stat-card-slate {
+  background: linear-gradient(135deg, #2b617d 0%, #143e54 100%);
+}
+
+.stat-card-artisan .stat-icon {
+  font-size: 2.5rem;
+  opacity: 0.25;
+  position: absolute;
+  right: 1.2rem;
+  bottom: 0.8rem;
+}
+
+.stat-card-artisan .stat-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
+  margin-bottom: 0.4rem;
+}
+
+.stat-card-artisan .stat-value {
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+}
+
+/* Páginas de Autenticación (Login / Registro) */
+.auth-page {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  background: #fffdfa;
+  border: 1.5px solid #e7d5bf;
+  border-top: 4.5px solid var(--artisan-terracotta);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(184, 88, 52, 0.16);
+}
+
+.auth-card h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-card .lead {
+  font-size: 0.98rem;
+  color: var(--artisan-ink-muted);
+  margin-bottom: 2rem;
+}
+
+/* Perfil de Emprendedor con Fondo Colorido Artesanal */
+.profile-banner {
+  background: linear-gradient(135deg, #183327 0%, #254a3b 35%, #7a3821 78%, #b85834 100%);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  border-bottom: 4px solid var(--artisan-amber);
+  box-shadow: 0 10px 30px rgba(184, 88, 52, 0.20);
+}
+
+.profile-avatar-lg {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.profile-preview {
+  text-align: center;
+  background: #fffaf2;
+  border: 1.5px dashed #dec9b3;
+  border-radius: var(--radius-md);
+  padding: 2rem;
+}
+
+.profile-preview img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  box-shadow: var(--artisan-shadow-md);
+  margin: 1rem auto;
+  display: block;
+}
+
+/* Ficha de Detalle de Producto */
+.product-detail-card {
+  background: #fffdfa;
+  border: 1.5px solid #e7d5bf;
+  border-top: 4px solid var(--artisan-terracotta);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--artisan-shadow-sm);
+}
+
+.product-detail-img {
+  border-radius: var(--radius-md);
+  box-shadow: var(--artisan-shadow-md);
+  object-fit: cover;
+  max-height: 480px;
+  width: 100%;
+}
+
+.artisan-box {
+  background: var(--artisan-sage-light);
+  border: 1px solid var(--artisan-sage-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.trust-badge-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--artisan-ink-muted);
+}
+
+.trust-badge-item i {
+  color: var(--artisan-terracotta);
+}
+
+/* Tarjeta de Producto Boutique / Artesanal */
+.product-card {
+  background: var(--artisan-card-bg);
+  border: 1.5px solid var(--artisan-border);
+  border-top: 3.5px solid var(--artisan-terracotta);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.28s cubic-bezier(0.2, 0, 0, 1), border-color 0.25s ease;
+  box-shadow: 0 6px 18px rgba(184, 88, 52, 0.08);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--artisan-amber);
+  box-shadow: 0 16px 36px rgba(184, 88, 52, 0.18);
+}
+
+.product-card .img-wrapper {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: #f1e2cf;
+}
+
+.product-card .img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.product-card:hover .img-wrapper img {
+  transform: scale(1.06);
+}
+
+.badge-artisan {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(25, 21, 19, 0.82);
+  backdrop-filter: blur(6px);
+  color: #fef08a;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(254, 240, 138, 0.3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.product-card .card-body {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card .price {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #8c371b;
+  line-height: 1;
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-shell, .hero-shop, .auth-card, .product-detail-card {
+  animation: rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Responsividad */
+@media (max-width: 991.98px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    --bs-gutter-x: 1.5rem;
+  }
+
+  .navbar {
+    padding: 0.65rem 0;
+  }
+
+  .navbar .container {
+    flex-wrap: wrap;
+  }
+
+  .navbar-brand {
+    min-width: 0;
+    max-width: calc(100% - 3.5rem);
+    font-size: 1.08rem;
+  }
+
+  .navbar-brand > span:not(.brand-badge):not(.badge) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.35);
+    padding: 0.35rem 0.55rem;
+  }
+
+  .navbar-collapse {
+    display: none !important;
+    flex-basis: 100%;
+    margin-top: 0.7rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .navbar-collapse.is-open {
+    display: block !important;
+  }
+
+  .navbar-nav {
+    align-items: stretch !important;
+    gap: 0.15rem !important;
+  }
+
+  .navbar .nav-link,
+  .navbar .user-chip,
+  .navbar-nav .btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .navbar .user-chip {
+    margin-top: 0.35rem;
+  }
+
+  .navbar-nav .btn {
+    margin: 0.35rem 0 0 !important;
+  }
+
+  .navbar .dropdown-menu {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    margin: 0.25rem 0;
+    box-shadow: none;
+  }
+
+  .hero-shop {
+    padding: 3.2rem 0 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-shop h1 {
+    font-size: clamp(2.2rem, 10vw, 2.8rem);
+  }
+
+  .hero-shop p {
+    font-size: 1rem;
+  }
+
+  .hero-badges {
+    gap: 0.5rem;
+  }
+
+  .hero-badge-pill {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .page-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .page-heading > :last-child {
+    width: 100%;
+  }
+
+  .page-heading > :last-child .btn {
+    flex: 1;
+  }
+
+  .surface-panel, .product-detail-card, .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-page {
+    padding: 2rem 0.75rem;
+  }
+
+  .auth-card {
+    padding: 1.35rem;
+  }
+
+  .auth-card h1 {
+    font-size: 2rem;
+  }
+
+  .product-detail-card {
+    padding: 1.15rem;
+  }
+
+  .profile-banner {
+    padding: 1.5rem 1rem;
+  }
+
+  .product-detail-img {
+    max-height: 360px;
+  }
+
+  .card-body {
+    padding: 1.15rem;
+  }
+
+  .stat-card-artisan {
+    padding: 1.15rem;
+  }
+
+  .stat-card-artisan .stat-value {
+    font-size: 1.9rem;
+  }
+
+  .table-responsive {
+    border-radius: var(--radius-sm);
+  }
+
+  .table {
+    min-width: 680px;
+  }
+
+  footer {
+    padding: 2.5rem 0 1.5rem;
+    margin-top: 3rem;
+  }
+
+  footer .footer-crest {
+    font-size: 1.08rem;
+  }
+
+  footer .footer-crest span {
+    max-width: 280px;
+  }
+
+  footer p {
+    font-size: 0.84rem;
+  }
+
+  .product-card .img-wrapper {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-shell {
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-shop h1 {
+    margin-top: 0.45rem;
+  }
+
+  .catalog-intro {
+    align-items: flex-start !important;
+    flex-direction: column;
+  }
+
+  .catalog-intro .badge {
+    align-self: flex-start;
+  }
+
+  .product-card .img-wrapper {
+    height: 220px;
+  }
+
+  .btn {
+    padding: 0.62rem 0.9rem;
+  }
+
+  .d-flex.gap-3.border.rounded {
+    align-items: flex-start !important;
+  }
+}
