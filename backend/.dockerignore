@@ -1,0 +1,6 @@
+.env
+.env.*
+vendor/
+uploads/
+.git/
+*.log

@@ -3,17 +3,20 @@
 # ============================================
 
 # Usar imagen oficial de PHP con Apache
-FROM php:8.0-apache
+FROM php:8.3-apache
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # ============================================
 # INSTALAR EXTENSIONES DE PHP
 # ============================================
-RUN docker-php-ext-install pdo_mysql mysqli
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends libcurl4-openssl-dev \
+	&& docker-php-ext-install pdo_mysql mysqli curl \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Habilitar mod_rewrite para URLs amigables
-RUN a2enmod rewrite
+RUN a2enmod rewrite headers
 
 # ============================================
 # CONFIGURAR APACHE

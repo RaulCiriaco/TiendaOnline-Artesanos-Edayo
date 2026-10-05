@@ -13,14 +13,20 @@ require_once __DIR__ . '/utils/env.php';
 // 2. CONFIGURACIÓN DE HEADERS
 // ============================================
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-header("Access-Control-Allow-Credentials: true");
+$allowedOrigins = array_filter(array_map('trim', explode(',', getenv('CORS_ALLOWED_ORIGINS') ?: 'http://localhost:5174,http://localhost:5173')));
+$requestOrigin = $_SERVER['HTTP_ORIGIN'] ?? '';
+$originAllowed = $requestOrigin !== '' && in_array($requestOrigin, $allowedOrigins, true);
+header('Vary: Origin');
+
+if ($originAllowed) {
+    header("Access-Control-Allow-Origin: $requestOrigin");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+}
 
 // Manejar preflight (OPTIONS)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
+    http_response_code($requestOrigin === '' || $originAllowed ? 204 : 403);
     exit();
 }
 
