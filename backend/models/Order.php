@@ -56,7 +56,11 @@ class Order {
             SELECT o.*, u.name as client_name, u.email as client_email 
             FROM {$this->table} o
             JOIN users u ON o.user_id = u.id
-            WHERE JSON_SEARCH(o.products, 'one', CAST(? AS CHAR)) IS NOT NULL
+                WHERE EXISTS (
+                    SELECT 1
+                    FROM JSON_TABLE(o.products, '$[*]' COLUMNS (entrepreneur_id INT PATH '$.entrepreneur_id')) items
+                    WHERE items.entrepreneur_id = ?
+                )
             ORDER BY o.created_at DESC
         ");
         $stmt->execute([$entrepreneurId]);
@@ -115,8 +119,12 @@ class Order {
 
     public function hasEntrepreneurProducts($orderId, $entrepreneurId) {
         $stmt = $this->pdo->prepare("
-            SELECT id FROM {$this->table} 
-            WHERE id = ? AND JSON_SEARCH(products, 'one', CAST(? AS CHAR)) IS NOT NULL
+            SELECT o.id FROM {$this->table} o
+            WHERE o.id = ? AND EXISTS (
+                SELECT 1
+                FROM JSON_TABLE(o.products, '$[*]' COLUMNS (entrepreneur_id INT PATH '$.entrepreneur_id')) items
+                WHERE items.entrepreneur_id = ?
+            )
         ");
         $stmt->execute([$orderId, $entrepreneurId]);
         return $stmt->fetch() !== false;
@@ -175,14 +183,20 @@ class Order {
         $year = $year ?? date('Y');
         $sql = "
             SELECT 
-                MONTH(created_at) as month,
+                MONTH(o.created_at) as month,
                 COUNT(*) as total_orders,
-                SUM(total) as total_sales
-            FROM {$this->table}
-            WHERE YEAR(created_at) = ? AND status IN ('paid', 'shipped', 'delivered')";
-        if ($entrepreneurId !== null) $sql .= " AND JSON_SEARCH(products, 'one', CAST(? AS CHAR)) IS NOT NULL";
+                SUM(o.total) as total_sales
+            FROM {$this->table} o
+            WHERE YEAR(o.created_at) = ? AND o.status IN ('paid', 'shipped', 'delivered')";
+        if ($entrepreneurId !== null) {
+            $sql .= " AND EXISTS (
+                SELECT 1
+                FROM JSON_TABLE(o.products, '$[*]' COLUMNS (entrepreneur_id INT PATH '$.entrepreneur_id')) items
+                WHERE items.entrepreneur_id = ?
+            )";
+        }
         $sql .= "
-            GROUP BY MONTH(created_at)
+            GROUP BY MONTH(o.created_at)
             ORDER BY month
         ";
         $stmt = $this->pdo->prepare($sql);
@@ -249,13 +263,17 @@ class Order {
     }
 
     public function getStatusSummary($entrepreneurId = null) {
-        $sql = "SELECT status, COUNT(*) AS total FROM {$this->table}";
+        $sql = "SELECT o.status, COUNT(*) AS total FROM {$this->table} o";
         $params = [];
         if ($entrepreneurId !== null) {
-            $sql .= " WHERE JSON_SEARCH(products, 'one', CAST(? AS CHAR)) IS NOT NULL";
+            $sql .= " WHERE EXISTS (
+                SELECT 1
+                FROM JSON_TABLE(o.products, '$[*]' COLUMNS (entrepreneur_id INT PATH '$.entrepreneur_id')) items
+                WHERE items.entrepreneur_id = ?
+            )";
             $params[] = $entrepreneurId;
         }
-        $sql .= ' GROUP BY status';
+        $sql .= ' GROUP BY o.status';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
         $summary = [];
