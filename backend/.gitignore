@@ -9,7 +9,6 @@
 # DEPENDENCIAS Y CACHE DE PHP
 # ============================================
 /vendor/
-composer.lock
 composer.phar
 
 # ============================================

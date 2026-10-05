@@ -11,7 +11,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # INSTALAR EXTENSIONES DE PHP
 # ============================================
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends libcurl4-openssl-dev \
+	&& apt-get install -y --no-install-recommends libcurl4-openssl-dev unzip \
 	&& docker-php-ext-install pdo_mysql mysqli curl \
 	&& rm -rf /var/lib/apt/lists/*
 

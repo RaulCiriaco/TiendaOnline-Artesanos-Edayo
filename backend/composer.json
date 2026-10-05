@@ -11,13 +11,11 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "firebase/php-jwt": "6.10.0",
         "phpmailer/phpmailer": "^6.0",
         "cloudinary/cloudinary_php": "^2.0"
     },
     "config": {
         "optimize-autoloader": true,
-        "sort-packages": true,
-        "policy.advisories.ignore-id": ["PKSA-y2cr-5h3j-g3ys"]
+        "sort-packages": true
     }
 }
