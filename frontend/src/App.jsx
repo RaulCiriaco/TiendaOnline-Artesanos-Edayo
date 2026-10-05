@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './context/AuthContext';
 
 // Componentes comunes
-import Navbar from './components/common/Navbar';
+import Navbar from './components/common/NavBar';
 import Footer from './components/common/Footer';
 
 // Páginas públicas
